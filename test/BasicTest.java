@@ -6,8 +6,11 @@ import models.*;
 public class BasicTest extends UnitTest {
 
     @Test
-    public void aVeryImportantThingToTest() {
-        assertEquals(2, 1 + 1);
-    }
+    public void ProductShouldBeRetrievedByName() {
+      new Product("Cheese Lover's", 1).save();
 
+      Product result = Product.find("byName", "Cheese Lover's").first();
+      assertNotNull(result);
+      assertEquals("Cheese Lover's", result.name);
+    }
 }

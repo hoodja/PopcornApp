@@ -1,7 +1,27 @@
-# you describe your data using the YAML notation here
-# and then load them using Fixtures.load("data.yml")
+Product(SWEET):
+  name: Sweet & Savory
+  quantityInCase: 1
 
-# User(bob):
-#   email: bob@gmail.com
-#   password: secret
-#   fullname: Bob
+Product(CHEESE):
+  name: Cheese Lovers
+  quantityInCase: 1
+
+Product(POPPING):
+  name: Popping Corn
+  quantityInCase: 6
+
+ProductEntry(sweet):
+  product: SWEET
+  price: 40
+
+ProductEntry(cheese):
+  product: CHEESE
+  price: 30
+
+ProductEntry(popping):
+  product: POPPING
+  price: 9
+
+ProductCatalog(fall2011):
+  products: [sweet, cheese, popping]
+

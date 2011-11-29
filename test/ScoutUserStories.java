@@ -5,28 +5,36 @@ import models.*;
 
 public class ScoutUserStories extends UnitTest {
 
+    @Before
+    public void ResetPersistence() {
+      Fixtures.deleteAll();
+    }
+
     @Test
     public void EnterAnOrder() {
-      new Product("Sweet 'N Savory", 1, 40).save();
-      new Product("Cheese Lover's", 1, 30).save();
-      new Product("Popping Corn", 1, 9).save();
 
-      new Scout("Andrew", "H").save();
+      Fixtures.load("data.yml");
+      List<ProductCatalog> catalogs = ProductCatalog.all().fetch();
+      assertEquals(1, catalogs.size());
 
-      Scout andy = Scout.find("byName", "Andrew");
-      andy.orderForm()
-          .buildOrder()
-          .withCustomer("Sue Hood")
-          .withAddress("6306 S. 104th Street")
-          .withCity("Omaha")
-          .withStateCode("NE")
-          .withPostalCode("68127")
-          .enter(Product.find("byName", "Popping Corn"), 2)
-          .enter(Product.find("byName", "Cheese Lover's"), 1)
-          .sell();
+      ProductCatalog current = catalogs.get(0);
+      assertEquals(3, current.products.size());
 
-      Product result = Product.find("byName", "Cheese Lover's").first();
-      assertNotNull(result);
-      assertEquals("Cheese Lover's", result.name);
+      Scout andy = new Scout("Andrew", "H", current).save();
+
+      Product SWEET = Product.find("byName", "Sweet & Savory").first();
+      assertNotNull(SWEET);
+      Product CHEESE = Product.find("byName", "Cheese Lovers").first();
+      assertNotNull(CHEESE);
+      Product POPPING = Product.find("byName", "Popping Corn").first();
+      assertNotNull(POPPING);
+
+      PopcornOrder order = andy.createOrder("Grandma Hood");
+      order.add((OrderEntry) new OrderEntry(SWEET, 1).save());
+      order.add((OrderEntry) new OrderEntry(CHEESE, 2).save());
+      order.add((OrderEntry) new OrderEntry(POPPING, 5).save());
+      order = order.save();
+
+      assertEquals(new Integer(145), order.getTotal());
     }
 }
