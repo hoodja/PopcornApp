@@ -3,7 +3,7 @@
 ### User Stories (prioritized)
 
 * As a scout I want to sell popcorn
-  1. -As a scout I want to enter a new popcorn order-
+  1. <del>As a scout I want to enter a new popcorn order</del>
   2. As a scout I want to enter a complex order
   3. As a scout I want to see the total dollar amount for an order
   4. As a scout I want to mark an order as delivered
