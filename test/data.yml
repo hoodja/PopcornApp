@@ -25,3 +25,7 @@ ProductEntry(popping):
 ProductCatalog(fall2011):
   products: [sweet, cheese, popping]
 
+Scout(andy):
+  firstName: Andy
+  lastName: H.
+  salesCatalog: fall2011
