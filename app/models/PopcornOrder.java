@@ -18,6 +18,9 @@ public class PopcornOrder extends Model {
     this.seller = seller;
     this.catalog = catalog;
     this.customerName = customer;
+    if (!this.seller.orders.contains(this)) {
+      this.seller.orders.add(this);
+    }
   }
 
   public void add(OrderEntry entry) {
