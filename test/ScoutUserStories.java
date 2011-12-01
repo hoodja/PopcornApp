@@ -72,5 +72,7 @@ public class ScoutUserStories extends UnitTest {
 
       List<PopcornOrder> orders = PopcornOrder.find("bySeller", ANDY).fetch();
       assertEquals(2, orders.size());
+
+      assertEquals(new Integer(264), ANDY.getTotalSales());
     }
 }
