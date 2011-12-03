@@ -36,5 +36,14 @@ public class Scout extends Model {
 
     return total;
   }
+
+  public Integer getCountOf(Product product) {
+    int total = 0;
+    for (PopcornOrder order : orders) {
+      OrderEntry entry = order.getEntryFor(product);
+      total += entry.quantity;
+    }
+    return total;
+  }
 }
 

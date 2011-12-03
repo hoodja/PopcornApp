@@ -75,4 +75,47 @@ public class ScoutUserStories extends UnitTest {
 
       assertEquals(new Integer(264), ANDY.getTotalSales());
     }
+
+    @Test
+    public void SeeTotalNumberOfEachProductAcrossAllOrders() {
+      PopcornOrder order1 = ANDY.createOrder("Grandma Hood");
+      order1.add((OrderEntry) new OrderEntry(SWEET, 1).save());
+      order1.add((OrderEntry) new OrderEntry(CHEESE, 2).save());
+      order1.add((OrderEntry) new OrderEntry(POPPING, 5).save());
+      order1 = order1.save();
+      assertEquals(new Integer(145), order1.getTotal());
+
+      PopcornOrder order2 = ANDY.createOrder("Papa Hood");
+      order2.add((OrderEntry) new OrderEntry(SWEET, 2).save());
+      order2.add((OrderEntry) new OrderEntry(CHEESE, 1).save());
+      order2.add((OrderEntry) new OrderEntry(POPPING, 1).save());
+      order2 = order2.save();
+      assertEquals(new Integer(119), order2.getTotal());
+
+      assertEquals("sweet", new Integer(3), ANDY.getCountOf(SWEET));
+      assertEquals("cheese", new Integer(3), ANDY.getCountOf(CHEESE));
+      assertEquals("popping", new Integer(6), ANDY.getCountOf(POPPING));
+    }
+
+    @Test
+    public void SeeTotalNumberOfEachProductWithNoOrders() {
+      assertEquals("sweet", new Integer(0), ANDY.getCountOf(SWEET));
+      assertEquals("cheese", new Integer(0), ANDY.getCountOf(CHEESE));
+      assertEquals("popping", new Integer(0), ANDY.getCountOf(POPPING));
+    }
+
+    @Test
+    public void SeeTotalNumberOfEachProductWithSomeProductsHavingZeroSales() {
+      PopcornOrder order1 = ANDY.createOrder("Grandma Hood");
+      order1.add((OrderEntry) new OrderEntry(SWEET, 1).save());
+      order1 = order1.save();
+
+      PopcornOrder order2 = ANDY.createOrder("Papa Hood");
+      order2.add((OrderEntry) new OrderEntry(CHEESE, 1).save());
+      order2 = order2.save();
+
+      assertEquals("sweet", new Integer(1), ANDY.getCountOf(SWEET));
+      assertEquals("cheese", new Integer(1), ANDY.getCountOf(CHEESE));
+      assertEquals("popping", new Integer(0), ANDY.getCountOf(POPPING));
+    }
 }

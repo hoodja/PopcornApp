@@ -6,8 +6,8 @@
   1. <del>As a scout I want to enter a new popcorn order</del>
   2. <del>As a scout I want to enter a complex order</del>
   3. <del>As a scout I want to see the total dollar amount for an order</del>
-  4. As a scout I want to enter multiple orders
-  4. As a scout I want to see the total number of each product across all orders
+  4. <del>As a scout I want to enter multiple orders</del>
+  4. <del>As a scout I want to see the total number of each product across all orders</del>
   4. As a scout I want to mark an order as delivered
   5. As a scout I want to mark an order as paid
   6. As a scout I want to mark part of an order as delivered

@@ -34,6 +34,17 @@ public class PopcornOrder extends Model {
     }
     return total;
   }
+  
+  public OrderEntry getEntryFor(Product product) {
+    OrderEntry result = new OrderEntry(product, 0);
+    for (OrderEntry entry : saleItems) {
+      if (entry.product.equals(product)) {
+        result = entry;
+        break;
+      }
+    }
+    return result;
+  }
 
 }
 
